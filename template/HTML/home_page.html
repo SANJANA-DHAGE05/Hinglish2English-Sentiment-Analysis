@@ -1,0 +1,629 @@
+<!-- original code (home_page.html) -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HinglishToEnglish | Home Page</title>
+
+    <!--link for CSS code-->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='../static/CSS/style1.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- ---------------------------------------- -->
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- ------------------------------------------ -->
+
+    <!-- Enhanced sentiment styling -->
+    <style>
+      .sentiment-container {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        margin-top: 10px;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 20px;
+      }
+
+      .sentiment-positive {
+        background: linear-gradient(135deg, #481151, #d478a6, #5f7caf);
+        color: white;
+      }
+      .sentiment-neutral {
+        background: linear-gradient(135deg, #481151, #d478a6, #5f7caf);
+        color: white;
+      }
+      .sentiment-negative {
+        background: linear-gradient(135deg, #481151, #d478a6, #5f7caf);
+        color: white;
+      }
+
+      .sentiment-emoji {
+        font-size: 28px;
+      }
+      .sentiment-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #sentiment-chart{
+        width: 100%;
+        margin-left: 40px;
+        border-radius: 60%;
+      }
+    </style>
+  </head>
+  <body>
+    <!--header tag start-->
+    <header>
+      <!--option panel design-->
+      <!-- <div class="menu_bar"> -->
+      <!-- <ul>
+          <li class="active">
+            <a href="#">Option</a>
+            <div class="sub-menu">
+              <ul>
+                <li>
+                  <a class="use-keyboard-input" href="javascript:virtual();"
+                    >Virtual Keyboard</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="linguistic" id="h2e"></li> -->
+      <div class="menu_bar" id="h2e">
+        <i class="fa-solid fa-language"></i> HinglishToEnglish
+      </div>
+
+      <!-- </ul>
+      </div> -->
+    </header>
+    <!--header tag end-->
+
+    <!--quote design code-->
+    <br />
+    <div class="quote">
+      <span class="colon">&ldquo;</span
+      ><b class="firstlet"
+        >The Limits of our Language are the Limits of our world</b
+      ><span class="colon">&rdquo;</span>
+    </div>
+
+    <!--form tag start-->
+    <form
+      action="{{url_for('radio_check')}}"
+      class="form-inline"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <!-- NEW NEW CODE -->
+      <div class="radio_btns">
+        <label class="container1">
+          <input
+            type="radio"
+            name="radiobtn"
+            id="keyboard_ip"
+            value="1"
+            onclick="demo1()"
+          />
+          <i class="fas fa-keyboard"></i> Keyboard
+        </label>
+        <label class="container1">
+          <input
+            type="radio"
+            name="radiobtn"
+            id="voice_ip"
+            value="2"
+            onclick="demo1()"
+          />
+          <i class="fas fa-microphone"></i> Voice
+        </label>
+        <label class="container1">
+          <input
+            type="radio"
+            name="radiobtn"
+            id="file_ip"
+            value="3"
+            onclick="demo1()"
+          />
+          <i class="fas fa-file-upload"></i> File Upload
+        </label>
+      </div>
+      <br /><br />
+
+      <!--keyboard input design-->
+      <textarea
+        type="text"
+        class="hinglish"
+        id="hinglish"
+        name="hinglish"
+        placeholder="Enter Hinglish Text"
+        disabled
+      ></textarea>
+
+      <!--virtual-keyboard input design-->
+      <textarea
+        type="text"
+        class="use-keyboard-input"
+        placeholder="Enter Hinglish Text"
+        name="vir_text"
+        id="text2"
+      ></textarea>
+
+      <!--audio-play button design-->
+      <a
+        href="#"
+        id="convert1"
+        class="fa"
+        onclick="read_me1()"
+        style="font-size: 24px; color: black; align-self: self-end"
+        >&#xf028;</a
+      >
+
+      <!--voice input design-->
+      <textarea
+        type="text"
+        id="write"
+        class="voice_ip"
+        name="text3"
+        placeholder="Speak here..."
+      ></textarea>
+      <i
+        class="fa fa-microphone btn btn-danger"
+        id="microphone"
+        aria-hidden="true"
+        style="font-size: 24px; color: black; align-self: self-end"
+        onclick="startConverting()"
+      ></i>
+
+      <!--file input design-->
+      <!-- <div class="file-input" id="file_insertion">
+                <input type="file" id="file" class="file" name="myfile" accept=".txt">
+                <label for="file">
+                    Select file
+                    <p class="file-name"></p>
+                </label>
+            </div> -->
+
+      <!-- New code for file input design -->
+      <div class="file-input" id="file_insertion">
+        <label for="file">
+          Select File
+          <input
+            type="file"
+            id="file"
+            class="file"
+            name="myfile"
+            accept=".txt"
+            style="display: none"
+          />
+        </label>
+        <span id="file-name" style="margin-left: 10px">No file selected</span>
+        <br /><br />
+        <textarea
+          type="text"
+          class="english"
+          id="fileContentTextarea"
+          name="hinglish"
+          placeholder="File content will appear here"
+          disabled
+        ></textarea>
+      </div>
+
+      <!--buttons code-->
+      <div class="Buttons" style="margin-left: 6px; margin-top: 10px">
+        <a href="radio_check"
+          ><button type="submit" class="btn-final">
+            <div><i class="fas fa-paper-plane"></i> Translate</div>
+          </button></a
+        >
+        <!-- <button type="submit" class="btn-final">
+           <div><i class="fas fa-chart-line"></i> Analyze</div>
+      </button> -->
+
+        <button id="clear" type="clear" class="btn-final">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+
+        <button id="downloadlink" download="info.txt" class="btn-final">
+          <i class="fas fa-download"></i> Download
+        </button>
+      </div>
+      <br /><br />
+
+      <!--keyboard & file output design-->
+      <textarea
+        type="text"
+        class="english"
+        id="english"
+        name="english"
+        placeholder="Text In English"
+        disabled
+      >
+{{ etext }}</textarea
+      >
+
+      <!--audio-play button design-->
+      <a
+        href="#"
+        id="convert2"
+        class="fa"
+        onclick="read_me2()"
+        style="font-size: 24px; color: black; align-self: self-end"
+        >&#xf028;</a
+      >
+
+      <br /><br />
+      <!--Sentiment Analysis Display-->
+      {% if sentiment and emoji %}
+      <div
+        class="sentiment-container sentiment-{{ sentiment.lower().replace(' ', '-') }}"
+      >
+        <div class="sentiment-emoji">{{ emoji }}</div>
+        <div class="sentiment-details">
+          <div>Sentiment: {{ sentiment }}</div>
+        </div>
+      </div>
+      {% endif %}
+
+      <br /><br />
+      <!-- -------------------------------------------- -->
+      {% if sentiment_chart %}
+      <div id="sentiment-chart">
+        <script>
+          var graphs = {{ sentiment_chart | safe }};
+          Plotly.newPlot('sentiment-chart', graphs.data, graphs.layout);
+        </script>
+      </div>
+      {% endif %}
+
+      <!-- -------------------------------------------- -->
+    </form>
+    <!--form tag end-->
+
+    <!--footer tag start-->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>About us</h4>
+            <ul>
+              <li>
+                <a href="about_page">
+                  <i class="fas fa-info-circle"></i> Our mission</a
+                >
+              </li>
+            </ul>
+          </div>
+          <br />
+
+          <div class="footer-col">
+            <h4>Help</h4>
+            <ul>
+              <li>
+                <a href="help_page"
+                  ><i class="fas fa-question-circle"></i> FAQ</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer tag end -->
+
+    <!--JS code start here-->
+    <script src="../../static/JS/script1.js"></script>
+
+    <!-- file input js code -->
+
+    <!--download file code-->
+    <script type="text/javascript">
+      function download(filename, text) {
+        var element = document.createElement("a");
+        element.setAttribute(
+          "href",
+          "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+        );
+        element.setAttribute("download", filename);
+        element.style.display = "none";
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      }
+
+      document.getElementById("downloadlink").addEventListener(
+        "click",
+        function () {
+          var text = document.getElementById("english").value;
+          var filename = "Result.txt";
+          download(filename, text);
+        },
+        false
+      );
+    </script>
+
+    <!--voice output code-->
+    <script type="text/javascript">
+      let convert,
+        speech,
+        audio,
+        isPlaying = false;
+
+      function read_me1() {
+        convert = document.getElementById("convert1");
+        if (document.getElementById("keyboard_ip").checked) {
+          speech = document.getElementById("hinglish");
+        } else {
+          speech = document.getElementById("text2");
+        }
+        audio_play();
+      }
+
+      function read_me2() {
+        convert = document.getElementById("convert2");
+        speech = document.getElementById("english");
+        audio_play();
+      }
+
+      function audio_play() {
+        function setupAudio() {
+          const speechText = speech.value;
+          if (audio) {
+            speechSynthesis.cancel();
+            audio = null;
+          }
+          audio = new SpeechSynthesisUtterance(speechText);
+          const voices = speechSynthesis.getVoices();
+          audio.voice = voices[2] || voices[0];
+          audio.lang = "en-US";
+          return audio;
+        }
+
+        convert.addEventListener("click", function () {
+          if (!audio) {
+            // Start or restart audio
+            audio = setupAudio();
+            speechSynthesis.speak(audio);
+            convert.innerHTML = "&#xf04c;"; // Pause icon
+            isPlaying = true;
+          } else if (speechSynthesis.speaking && !speechSynthesis.paused) {
+            // Pause audio
+            speechSynthesis.pause();
+            convert.innerHTML = "&#xf04b;"; // Play icon
+            isPlaying = false;
+          } else if (speechSynthesis.paused) {
+            // Resume audio
+            speechSynthesis.resume();
+            convert.innerHTML = "&#xf04c;"; // Pause icon
+            isPlaying = true;
+          }
+        });
+
+        if (audio) {
+          audio.addEventListener("end", function () {
+            convert.innerHTML = "&#xf028;"; // Speaker icon
+            isPlaying = false;
+            audio = null;
+          });
+        }
+      }
+
+      // Stop audio on page reload
+      window.addEventListener("beforeunload", function () {
+        speechSynthesis.cancel();
+      });
+
+      // Stop audio on reset
+      document
+        .getElementById("resetButton")
+        .addEventListener("click", function () {
+          speechSynthesis.cancel();
+          if (convert) {
+            convert.innerHTML = "&#xf028;"; // Reset to speaker icon
+          }
+          audio = null;
+          isPlaying = false;
+        });
+    </script>
+
+    <!--radio button onclick code-->
+    <script type="text/javascript">
+      document.getElementById("hinglish").style.display = "none";
+      document.getElementById("file_insertion").style.display = "none";
+      document.getElementById("text2").style.display = "none";
+      document.getElementById("convert1").style.display = "none";
+      document.getElementById("microphone").style.display = "none";
+      document.getElementById("write").style.display = "none";
+
+      function demo1() {
+        Keyboard.close();
+        speechSynthesis.cancel(); // Stop audio when switching radio buttons
+        if (convert) {
+          convert.innerHTML = "&#xf028;"; // Reset to speaker icon
+        }
+        audio = null;
+        isPlaying = false;
+
+        
+        if (document.getElementById("keyboard_ip").checked) {
+          document.querySelector("#hinglish").value = "";
+          document.querySelector("#text2").value = "";
+          document.querySelector("#write").innerHTML = "";
+          document.querySelector("#english").value = "";
+
+          document.getElementById("text2").style.display = "none";
+          document.getElementById("text2").disabled = true;
+          document.getElementById("hinglish").disabled = false;
+          document.getElementById("hinglish").style.display = "block";
+          document.getElementById("file_insertion").style.display = "none";
+          document.getElementById("convert1").style.display = "block";
+          document.getElementById("microphone").style.display = "none";
+          document.getElementById("write").style.display = "none";
+        } else if (document.getElementById("voice_ip").checked) {
+          document.querySelector("#hinglish").value = "";
+          document.querySelector("#text2").value = "";
+          document.querySelector("#write").innerHTML = "";
+          document.querySelector("#english").value = "";
+
+          document.getElementById("text2").style.display = "none";
+          document.getElementById("text2").disabled = true;
+          document.getElementById("hinglish").disabled = true;
+          document.getElementById("hinglish").style.display = "none";
+          document.getElementById("file_insertion").style.display = "none";
+          document.getElementById("convert1").style.display = "none";
+          document.getElementById("microphone").style.display = "block";
+          document.getElementById("write").style.display = "block";
+        } else {
+          document.querySelector("#hinglish").value = "";
+          document.querySelector("#text2").value = "";
+          document.querySelector("#write").innerHTML = "";
+          document.querySelector("#english").value = "";
+
+          document.getElementById("text2").style.display = "none";
+          document.getElementById("text2").disabled = true;
+          document.getElementById("hinglish").disabled = true;
+          document.getElementById("hinglish").style.display = "none";
+          document.getElementById("file_insertion").style.display = "block";
+          document.getElementById("convert1").style.display = "none";
+          document.getElementById("microphone").style.display = "none";
+          document.getElementById("write").style.display = "none";
+        }
+      }
+
+      const fileInput = document.getElementById("file");
+      const fileNameDisplay = document.getElementById("file-name");
+      const outputTextarea = document.getElementById("fileContentTextarea");
+
+      fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+
+        if (file) {
+          // Display the file name
+          fileNameDisplay.textContent = file.name;
+
+          // Read the file's content and display it in the textarea
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            outputTextarea.disabled = false; // Enable textarea if disabled
+            outputTextarea.value = e.target.result; // Display file content
+          };
+          reader.readAsText(file);
+        } else {
+          fileNameDisplay.textContent = "No file selected";
+          outputTextarea.value = ""; // Clear the textarea if no file is selected
+        }
+      });
+
+      function virtual() {
+        document.getElementById("keyboard_ip").checked = false;
+        document.getElementById("voice_ip").checked = false;
+        document.getElementById("file_ip").checked = false;
+
+        document.querySelector("#hinglish").value = "";
+        document.querySelector("#text2").value = "";
+        document.querySelector("#write").innerHTML = "";
+        document.querySelector("#english").value = "";
+
+        document.getElementById("text2").style.display = "block";
+        document.getElementById("text2").disabled = false;
+        document.getElementById("hinglish").disabled = true;
+        document.getElementById("hinglish").style.display = "none";
+        document.getElementById("file_insertion").style.display = "none";
+        document.getElementById("write").style.display = "none";
+        document.getElementById("convert1").style.display = "block";
+        document.getElementById("microphone").style.display = "none";
+        document.getElementById("write").style.display = "none";
+      }
+
+      // Updated microphone functionality
+      let recognition;
+
+      // Check for browser support of Web Speech API
+      if (
+        "webkitSpeechRecognition" in window ||
+        "SpeechRecognition" in window
+      ) {
+        recognition = new (window.SpeechRecognition ||
+          window.webkitSpeechRecognition)();
+        recognition.continuous = true; // Allow continuous speech input
+        recognition.interimResults = true; // Display interim results
+        recognition.lang = "en-US"; // Set language
+      } else {
+        alert("Sorry, your browser does not support speech recognition.");
+      }
+
+      let isListening = false;
+
+      function toggleMicrophone() {
+        const microphoneButton = document.getElementById("microphone");
+        const outputArea = document.getElementById("write");
+
+        if (isListening) {
+          // Stop recognition
+          recognition.stop();
+          microphoneButton.innerHTML = "&#xf130;"; // Microphone icon
+          isListening = false;
+        } else {
+          // Start recognition
+          outputArea.innerHTML = ""; // Clear the output area
+          recognition.start();
+          microphoneButton.innerHTML = " &#xf28b;"; // Listening icon
+          microphoneButton.style.cursor = "pointer";
+          isListening = true;
+        }
+
+        recognition.onresult = (event) => {
+          let transcript = "";
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+          }
+          outputArea.innerHTML = transcript; // Display the recognized text
+        };
+
+        recognition.onerror = (event) => {
+          console.error("Speech recognition error: ", event.error);
+          alert("An error occurred with speech recognition: " + event.error);
+          microphoneButton.innerHTML = " &#xf28d;"; // Reset to microphone icon
+          microphoneButton.style.cursor = "pointer";
+          isListening = false;
+        };
+
+        recognition.onend = () => {
+          microphoneButton.innerHTML = " &#xf28d;"; // Reset to microphone icon
+          microphoneButton.style.cursor = "pointer";
+          isListening = false;
+        };
+      }
+
+      // Add event listener to the microphone button
+      document
+        .getElementById("microphone")
+        .addEventListener("click", toggleMicrophone);
+    </script>
+  </body>
+</html>

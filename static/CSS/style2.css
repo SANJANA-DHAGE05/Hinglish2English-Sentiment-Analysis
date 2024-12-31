@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, serif;
+    box-sizing: border-box; 
+}
+
+/** body tag CSS starts **/
+body{
+    overflow-x: hidden;
+    padding-top: 90px;
+    font-family: Georgia, serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #E5BEEC, #F3E5EC, #BECCE5);
+}
+/** body tag CSS ends **/
+
+html{
+    scroll-behavior: smooth;
+}
+
+:root{
+    --color:white;
+    --navbar-height: 70px;
+}
+
+/** navbar CSS starts **/
+#navbar {   
+    display: flex; 
+    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--navbar-height);
+    padding: 10px 20px;
+    z-index: 100;
+    background: #640D5F;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#navbar .logo h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+#navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+#navbar ul li {
+    margin-left: 20px;
+}
+
+#navbar ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+#navbar ul li a:hover {
+    color: #555;
+}
+/** navbar CSS ends **/
+
+/** about section CSS starts **/
+.about-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    border-radius: 15px;
+    max-width: 800px;
+}
+
+.about-section .inner-container {
+    max-width: 800px;
+    padding: 20px;
+    text-align: justify;
+    background: #f7edf9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.about-section .inner-container h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about-section .inner-container .text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+/** about section CSS ends **/
+
+
+button {
+    padding: 0.75rem 1.2rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: black;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:0.2s ease;
+    background-color: #3B1E54;
+    margin-bottom: 100px;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    color: #000000;
+    font-weight: bold;
+    font-size: small;
+}
+
+/** footer CSS starts **/
+footer {
+    background-color: #FFFFFF;
+    text-align: center;
+    padding: 10px 20px;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+/** footer CSS ends **/
+
+/** responsive page CSS starts **/
+@media screen and (max-width: 1200px) {
+    .about-section .inner-container {
+        padding: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #navbar ul li {
+        margin-left: 10px;
+    }
+
+    .about-section {
+        padding: 20px;
+    }
+
+    .about-section .inner-container {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #navbar .logo h1 {
+        margin-bottom: 10px;
+    }
+
+    .about-section {
+        padding: 10px;
+    }
+
+    .about-section .inner-container {
+        padding: 15px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+}
+/** responsive page CSS ends **/

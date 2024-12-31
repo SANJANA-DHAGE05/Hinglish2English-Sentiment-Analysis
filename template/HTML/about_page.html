@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<!--html code start here-->
+<html lang="en">
+    <!--head tag start-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HinglishToEnglish | About Us</title>
+        
+        <!--link for CSS code-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/CSS/style2.css')}}">
+        <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+
+        <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='../static/CSS/style1.css')}}"
+      />
+      <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    </head>
+
+    <!--head tag end-->
+    
+    <!--body tag start-->
+    <body style= "background-color:#EBEAFF;">
+        <!--page logo design-->
+        <!-- <nav id="navbar">
+            <ul>
+                <li class="logo">
+                    <h1 style="color: rgb(0, 0, 0); font-size: 60px;" >HinglishToEnglish</h1>
+                    <h1 style="color:rgb(0, 0, 0); font-size: 60px;" ></h1>
+                </li>
+            </ul>
+        </nav> -->
+
+
+            <!--header tag start-->
+    <header>
+        <!--option panel design-->
+        <!-- <div class="menu_bar"> -->
+          <!-- <ul>
+            <li class="active">
+              <a href="#">Option</a>
+              <div class="sub-menu">
+                <ul>
+                  <li>
+                    <a class="use-keyboard-input" href="javascript:virtual();"
+                      >Virtual Keyboard</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+  
+            <li class="linguistic" id="h2e"></li> -->
+              <div class="menu_bar" id="h2e"><i class="fa-solid fa-language"></i> HinglishToEnglish </div>
+          <!-- </ul>
+        </div> -->
+      </header>
+      <!--header tag end-->
+        
+        <div class="about-section">
+            <div class="inner-container">
+                <h1>About Us</h1>
+                <p class="text">
+                  The project aims to create a system that integrates text conversion capabilities with real-time sentiment analysis to provide meaningful insights from textual data. Utilizing advanced Natural Language Processing (NLP) techniques and machine learning models, the system processes text to classify sentiments into categories such as positive, negative, or neutral. Additionally, it supports various text conversion functionalities, including handwritten-to-digital and speech-to-text conversion, making it versatile for diverse applications. The system is designed to handle  Hinglish  inputs and deliver high accuracy in both sentiment detection and text conversion, ensuring adaptability across different use cases such as social media monitoring, customer feedback analysis, and business insights. Its user-friendly interface enables seamless input, efficient processing, and detailed sentiment reporting. The project outcomes demonstrate the effectiveness of the system in bridging communication gaps and deriving actionable insights, showcasing its potential as a valuable tool in the digital era.            </div>
+            </div>
+        </div>
+        <br><br><div class="Buttons">
+          <a href="{{ url_for('home') }}"><button type="submit" class="btn-final">
+                <i class="fa fa-home" aria-hidden="true"></i> Home              </button></a>
+          </div>
+
+
+    </body>
+    <!--body tag end-->
+</html>
+<!--html code end here-->

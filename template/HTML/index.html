@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HinglishToEnglish | Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3B1E54;
+            --secondary-color: #640D5F;
+            --background-gradient-start: #f6d365;
+            --background-gradient-end: #fda085;
+            --text-color-dark: #333;
+            --text-color-light: #555;
+            --background-light: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        html, body {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #E5BEEC, #F3E5EC, #BECCE5);
+            /* background: linear-gradient(135deg, rgba(209, 107, 165, 0.9), rgba(142, 68, 173, 0.9), rgba(75, 0, 130, 0.9)); */
+            /* background: linear-gradient(135deg, #C59DCE, #DCC0D0, #9BAFD0); */
+            /* background: linear-gradient(135deg, #8E44AD, #640D5F, #000000);      */
+            text-align: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .landing-container {
+            background-color: var(--background-light);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 900px;
+            width: 100%;
+            transform: perspective(1000px) rotateX(-10deg);
+            transition: transform 0.5s ease;
+        }
+
+        .landing-container:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .logo {
+            font-size: 3rem;
+            color: var(--text-color-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            color:#3B1E54;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-color-light);
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .sentiment-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .sentiment-text::before,
+        .sentiment-text::after {
+            content: '"';
+            color: var(--primary-color);
+            font-size: 2rem;
+            position: absolute;
+            opacity: 0.5;
+        }
+
+        .sentiment-text::before {
+            left: 0;
+            top: -10px;
+        }
+
+        .sentiment-text::after {
+            right: 0;
+            bottom: -20px;
+        }
+
+        .get-started-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color:#640D5F;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .get-started-btn:hover {
+            background-color: #3B1E54;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(76, 175, 80, 0.4);
+            cursor: pointer;
+        }
+
+        .get-started-btn i {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .get-started-btn:hover i {
+            transform: translateX(5px);
+
+        }
+
+        .feature-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            color: #640D5F;
+        }
+
+        .feature-icons .icon-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-icons .icon-wrapper:hover {
+            transform: scale(1.1);
+        }
+
+        .feature-icons i {
+            font-size: 2rem;
+            color: #3B1E54;
+        }
+
+        .feature-icons .icon-label {
+            font-size: 0.8rem;
+            color: var(--text-color-light);
+        }
+
+        @media screen and (max-width: 768px) {
+            .landing-container {
+                padding: 30px 20px;
+                transform: none;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.3rem;
+            }
+
+            .feature-icons {
+                gap: 20px;
+            }
+
+            .feature-icons i {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .landing-container {
+                padding: 20px 15px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .sentiment-text {
+                font-size: 1rem;
+            }
+
+            .get-started-btn {
+                font-size: 1rem;
+                padding: 10px 25px;
+                cursor: pointer;
+            }
+
+            .feature-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature-icons .icon-wrapper {
+                flex-direction: row;
+                gap: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .feature-icons .icon-label {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <div class="logo">
+            <!-- <i class="fas fa-language"></i> -->
+            <span><i class="fas fa-language"></i> HinglishToEnglish Converter with Sentimental Analysis</span>
+        </div>
+        
+        <div class="tagline">
+            Break Language Barriers, One Hinglish Text at a Time
+        </div>
+        
+        <div class="sentiment-text">
+            Transforming Hinglish into Clear, Meaningful English
+        </div>
+
+        <form action="/home" method="get" style="display:inline;">
+          <button type="submit" class="get-started-btn">
+              Get Started <i class="fas fa-arrow-right"></i>
+          </button>
+      </form>
+        
+        <!-- <a href="home_page.html" class="get-started-btn">
+            Get Started <i class="fas fa-arrow-right"></i>
+        </a> -->
+        
+        <div class="feature-icons">
+            <div class="icon-wrapper">
+                <i class="fas fa-keyboard"></i>
+                <span class="icon-label">Keyboard Input</span>
+            </div>
+            <div class="icon-wrapper">
+                <i class="fas fa-microphone"></i>
+                <span class="icon-label">Voice Input</span>
+            </div>
+            <div class="icon-wrapper">
+                <i class="fas fa-file-upload"></i>
+                <span class="icon-label">File Upload</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
