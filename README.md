@@ -1,4 +1,4 @@
-# Hinglish to English Converter
+ Hinglish to English Converter
 
 This web application converts Hinglish text to English text. It also expands short notations to their respective long notations. The application accepts user input through four different methods: Keyboard, Virtual Keyboard, Voice, and File.
 
